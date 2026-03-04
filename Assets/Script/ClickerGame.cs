@@ -31,8 +31,23 @@ public class MonsterData
     public Sprite monsterSprite;
     public double regenMultiplier;
     public MonsterRarity rarity;
-}
 
+    [Header("Reward Settings")]
+    public double rewardMultiplier = 1.0;   // 👈 เพิ่มบรรทัดนี้
+}
+double CalculateTotalCost(int baseCost, float multiplier, int amount)
+{
+    double total = 0;
+    double currentCost = baseCost;
+
+    for (int i = 0; i < amount; i++)
+    {
+        total += currentCost;
+        currentCost *= multiplier;
+    }
+
+    return total;
+}
 
 
 
@@ -83,8 +98,8 @@ public class MonsterData
     public Image monsterImage;
 
     [Header("Monster Regen")]
-    public float regenInterval = 0.1f;   // ทุก 0.1 วิ
-    public double regenPercent = 0.01;   // 1%
+    public float regenInterval = 0.1f;   
+    public double regenPercent = 0.01;   
 
     [Header("Monster Time Limit")]
     public float monsterTimeLimit = 20f;
@@ -92,12 +107,39 @@ public class MonsterData
 
     [Header("Monster Timer UI")]
     public Slider monsterTimerSlider;
-    public TextMeshProUGUI monsterTimerText;   // 👈 เพิ่มตัวนี้
+    public TextMeshProUGUI monsterTimerText;  
+
+    [Header("Click Upgrade x5")]
+    public Button clickUpgradeButtonX5;
+    public TextMeshProUGUI clickUpgradeCostTextX5;
 
     private List<MonsterData> commonList = new List<MonsterData>();
     private List<MonsterData> rareList = new List<MonsterData>();
     private List<MonsterData> epicList = new List<MonsterData>();
     private List<MonsterData> legendaryList = new List<MonsterData>();
+
+    [Header("Auto Upgrade x5")]
+    public Button autoUpgradeButtonX5;
+    public TextMeshProUGUI autoUpgradeCostTextX5;
+
+    [Header("Click Upgrade Duplicate x5")]
+    public Button clickUpgradeButton2X5;
+    public TextMeshProUGUI clickUpgradeCostText2X5;
+
+    [Header("Auto Speed Upgrade x5")]
+    public Button autoSpeedUpgradeButtonX5;
+    public TextMeshProUGUI autoSpeedCostTextX5;
+
+    [Header("Auto Speed Upgrade")]
+    public Button autoSpeedUpgradeButton;
+    public TextMeshProUGUI autoSpeedCostText;
+
+    public int autoSpeedUpgradeCost = 200;
+    public float autoSpeedMultiplier = 0.8f; // ลด 20%
+    public float minAutoInterval = 0.1f;     // เร็วสุด 0.1 วิ
+
+    public TextMeshProUGUI autoIntervalText;
+    public TextMeshProUGUI autoSpeedPerSecondText;
 
     void Start()
 {
@@ -110,10 +152,16 @@ public class MonsterData
     autoUpgradeCost = PlayerPrefs.GetInt("autoUpgradeCost", 50);
 
     clickUpgradeCost2 = PlayerPrefs.GetInt("clickUpgradeCost2", 100);
+
+    autoInterval = PlayerPrefs.GetFloat("autoInterval", 1f);
+    autoSpeedUpgradeCost = PlayerPrefs.GetInt("autoSpeedUpgradeCost", 200);
     
 
     InvokeRepeating("AutoClick", autoInterval, autoInterval);
     InvokeRepeating(nameof(RegenerateMonster), regenInterval, regenInterval);
+
+    CancelInvoke("AutoClick");
+    InvokeRepeating("AutoClick", autoInterval, autoInterval);   
 
     foreach (var monster in monsterList)
 {
@@ -178,6 +226,8 @@ public class MonsterData
     PlayerPrefs.SetInt("autoPower", autoPower);
     PlayerPrefs.SetInt("autoUpgradeCost", autoUpgradeCost);
     PlayerPrefs.SetInt("clickUpgradeCost2", clickUpgradeCost2);
+    PlayerPrefs.SetFloat("autoInterval", autoInterval);
+    PlayerPrefs.SetInt("autoSpeedUpgradeCost", autoSpeedUpgradeCost);
 
     PlayerPrefs.Save();   
 
@@ -212,7 +262,7 @@ void Update()
 
     void UpdateUI()
 {
-    scoreText.text = "Score: " + FormatNumber(score);
+    scoreText.text = " " + FormatNumber(score);
 
     clickPowerText.text = "Click Power: " + clickPower;
     clickUpgradeCostText.text = "Cost: " + FormatNumber(clickUpgradeCost);
@@ -223,9 +273,36 @@ void Update()
     clickUpgradeCostText2.text = "Cost 2: " + FormatNumber(clickUpgradeCost2);
     clickUpgradePowerText2.text = "Power After x2: " + (clickPower * 2);
 
+    double totalCostX5 = CalculateTotalCost(clickUpgradeCost, costMultiplier, 5);
+    clickUpgradeCostTextX5.text = "Cost x5: " + FormatNumber(totalCostX5);
+
+    autoSpeedCostText.text = "Speed Cost: " + FormatNumber(autoSpeedUpgradeCost);
+    
+
+    
+    autoIntervalText.text = "Interval: " + autoInterval.ToString("0.00") + "s";
+
+
+    float speedPerSecond = 1f / autoInterval;
+    autoSpeedPerSecondText.text = "Speed: " + speedPerSecond.ToString("0.00") + " / sec";
+
+    double totalAutoCostX5 = CalculateTotalCost(autoUpgradeCost, costMultiplier, 5);
+    autoUpgradeCostTextX5.text = "Auto Cost x5: " + FormatNumber(totalAutoCostX5);
+
+    double totalDuplicateCostX5 = CalculateTotalCost(clickUpgradeCost2, 10f, 5);
+    clickUpgradeCostText2X5.text = "Duplicate x5 Cost: " + FormatNumber(totalDuplicateCostX5);
+
+    double totalSpeedCostX5 = CalculateTotalCost(autoSpeedUpgradeCost, costMultiplier, 5);
+    autoSpeedCostTextX5.text = "Speed x5 Cost: " + FormatNumber(totalSpeedCostX5);
+
+    UpdateAutoButtonStateX5();
+    UpdateAutoSpeedButtonState();
     UpdateClickButtonState();
     UpdateClickButtonState2();
     UpdateAutoButtonState();
+    UpdateClickButtonStateX5();
+    UpdateClickButtonState2X5();
+    UpdateAutoSpeedButtonStateX5();
 }
 
     void UpdateClickButtonState()
@@ -280,7 +357,7 @@ public void BuyClickUpgrade2()
 
         ShowFloatingText("CLICK POWER x2!", Color.magenta, clickUpgradeButton2.transform.position);
 
-        clickUpgradeCost2 *= 10;
+        clickUpgradeCost2 *= 2;
 
         SaveAndUpdate();
     }
@@ -304,28 +381,52 @@ void UpdateClickButtonState2()
 
 public void ResetSave()
 {
+    // ลบ Save ทั้งหมด
     PlayerPrefs.DeleteAll();
     PlayerPrefs.Save();
 
-    // รีเซ็ตระบบเงิน
+    // --------------------
+    // รีเซ็ตเงิน
     score = 0;
 
+    // --------------------
     // รีเซ็ตพลัง
     clickPower = 1;
     autoPower = 1;
 
+    // --------------------
     // รีเซ็ตค่าอัปเกรด
     clickUpgradeCost = 20;
     autoUpgradeCost = 50;
     clickUpgradeCost2 = 100;
 
+    autoSpeedUpgradeCost = 200;
+
+    // รีเซ็ตความเร็ว Auto
+    autoInterval = 1f;
+
+    // รีสตาร์ท AutoClick ใหม่
+    CancelInvoke("AutoClick");
+    InvokeRepeating("AutoClick", autoInterval, autoInterval);
+
+    // --------------------
     // รีเซ็ตมอนสเตอร์
     monsterLevel = 1;
     monsterMaxHP = baseMonsterHP;
     monsterHP = monsterMaxHP;
 
-    SpawnMonster();   // สร้างมอนใหม่
-    UpdateUI();       // อัปเดต UI ทั้งหมด
+    monsterTimer = 0f;
+
+    if (monsterTimerSlider != null)
+    {
+        monsterTimerSlider.maxValue = monsterTimeLimit;
+        monsterTimerSlider.value = monsterTimeLimit;
+    }
+
+    SpawnMonster();
+    UpdateUI();
+
+    ShowFloatingText("GAME RESET!", Color.red, scoreText.transform.position);
 }
 
 void ShowFloatingText(string message, Color color, Vector3 screenPosition)
@@ -419,7 +520,30 @@ void SpawnMonster()
 
 void KillMonster()
 {
-    double reward = rewardPerMonster * monsterLevel;
+    double rarityMultiplier = 1;
+
+switch (currentMonster.rarity)
+{
+    case MonsterRarity.Common:
+        rarityMultiplier = 1;
+        break;
+
+    case MonsterRarity.Rare:
+        rarityMultiplier = 5;
+        break;
+
+    case MonsterRarity.Epic:
+        rarityMultiplier = 20;
+        break;
+
+    case MonsterRarity.Legendary:
+        rarityMultiplier = 100;
+        break;
+}
+
+double reward = rewardPerMonster 
+                * monsterLevel 
+                * rarityMultiplier;
 
     score += (int)reward;
 
@@ -503,6 +627,204 @@ void ForceSpawnNewMonster()
 
     SpawnMonster();
 }
+
+public void BuyClickUpgradeX5()
+{
+    double totalCost = CalculateTotalCost(clickUpgradeCost, costMultiplier, 5);
+
+    if (score >= totalCost)
+    {
+        score = score - (int)totalCost;
+
+        for (int i = 0; i < 5; i++)
+        {
+            clickPower++;
+            clickUpgradeCost = Mathf.RoundToInt(clickUpgradeCost * costMultiplier);
+        }
+
+        ShowFloatingText("Click Power +5!", Color.green, clickUpgradeButtonX5.transform.position);
+
+        SaveAndUpdate();
+    }
+}
+
+void UpdateClickButtonStateX5()
+{
+    double totalCost = CalculateTotalCost(clickUpgradeCost, costMultiplier, 5);
+
+    if (score >= totalCost)
+    {
+        clickUpgradeButtonX5.interactable = true;
+        clickUpgradeButtonX5.image.color = Color.green;
+    }
+    else
+    {
+        clickUpgradeButtonX5.interactable = false;
+        clickUpgradeButtonX5.image.color = Color.red;
+    }
+}
+
+public void BuyAutoSpeedUpgrade()
+{
+    if (score >= autoSpeedUpgradeCost && autoInterval > minAutoInterval)
+    {
+        score -= autoSpeedUpgradeCost;
+
+        autoInterval *= autoSpeedMultiplier;
+
+        if (autoInterval < minAutoInterval)
+            autoInterval = minAutoInterval;
+
+        // รีสตาร์ท AutoClick ใหม่
+        CancelInvoke("AutoClick");
+        InvokeRepeating("AutoClick", autoInterval, autoInterval);
+
+        autoSpeedUpgradeCost = Mathf.RoundToInt(autoSpeedUpgradeCost * costMultiplier);
+
+        ShowFloatingText("Auto Speed Faster!", Color.cyan, autoSpeedUpgradeButton.transform.position);
+
+        SaveAndUpdate();
+    }
+}
+
+void UpdateAutoSpeedButtonState()
+{
+    if (score >= autoSpeedUpgradeCost && autoInterval > minAutoInterval)
+    {
+        autoSpeedUpgradeButton.interactable = true;
+        autoSpeedUpgradeButton.image.color = Color.green;
+    }
+    else
+    {
+        autoSpeedUpgradeButton.interactable = false;
+        autoSpeedUpgradeButton.image.color = Color.red;
+    }
+}
+
+public void BuyAutoUpgradeX5()
+{
+    double totalCost = CalculateTotalCost(autoUpgradeCost, costMultiplier, 5);
+
+    if (score >= totalCost)
+    {
+        score -= (int)totalCost;
+
+        for (int i = 0; i < 5; i++)
+        {
+            autoPower++;
+            autoUpgradeCost = Mathf.RoundToInt(autoUpgradeCost * costMultiplier);
+        }
+
+        ShowFloatingText("Auto Power +5!", Color.cyan, autoUpgradeButtonX5.transform.position);
+
+        SaveAndUpdate();
+    }
+}
+
+void UpdateAutoButtonStateX5()
+{
+    double totalCost = CalculateTotalCost(autoUpgradeCost, costMultiplier, 5);
+
+    if (score >= totalCost)
+    {
+        autoUpgradeButtonX5.interactable = true;
+        autoUpgradeButtonX5.image.color = Color.green;
+    }
+    else
+    {
+        autoUpgradeButtonX5.interactable = false;
+        autoUpgradeButtonX5.image.color = Color.red;
+    }
+}
+
+public void BuyClickUpgrade2X5()
+{
+    double totalCost = CalculateTotalCost(clickUpgradeCost2, 10f, 5);
+
+    if (score >= totalCost)
+    {
+        score -= (int)totalCost;
+
+        for (int i = 0; i < 5; i++)
+        {
+            clickPower *= 2;
+            clickUpgradeCost2 *= 10;
+        }
+
+        ShowFloatingText("CLICK POWER x32!!!", 
+            Color.magenta, 
+            clickUpgradeButton2X5.transform.position);
+
+        SaveAndUpdate();
+    }
+}
+
+void UpdateClickButtonState2X5()
+{
+    double totalCost = CalculateTotalCost(clickUpgradeCost2, 10f, 5);
+
+    if (score >= totalCost)
+    {
+        clickUpgradeButton2X5.interactable = true;
+        clickUpgradeButton2X5.image.color = Color.green;
+    }
+    else
+    {
+        clickUpgradeButton2X5.interactable = false;
+        clickUpgradeButton2X5.image.color = Color.red;
+    }
+}
+
+public void BuyAutoSpeedUpgradeX5()
+{
+    double totalCost = CalculateTotalCost(autoSpeedUpgradeCost, costMultiplier, 5);
+
+    if (score >= totalCost && autoInterval > minAutoInterval)
+    {
+        score -= (int)totalCost;
+
+        for (int i = 0; i < 5; i++)
+        {
+            autoInterval *= autoSpeedMultiplier;
+
+            if (autoInterval < minAutoInterval)
+            {
+                autoInterval = minAutoInterval;
+                break;
+            }
+
+            autoSpeedUpgradeCost = Mathf.RoundToInt(autoSpeedUpgradeCost * costMultiplier);
+        }
+
+        // รีสตาร์ท AutoClick
+        CancelInvoke("AutoClick");
+        InvokeRepeating("AutoClick", autoInterval, autoInterval);
+
+        ShowFloatingText("AUTO SPEED x5!", 
+            Color.cyan, 
+            autoSpeedUpgradeButtonX5.transform.position);
+
+        SaveAndUpdate();
+    }
+}
+
+void UpdateAutoSpeedButtonStateX5()
+{
+    double totalCost = CalculateTotalCost(autoSpeedUpgradeCost, costMultiplier, 5);
+
+    if (score >= totalCost && autoInterval > minAutoInterval)
+    {
+        autoSpeedUpgradeButtonX5.interactable = true;
+        autoSpeedUpgradeButtonX5.image.color = Color.green;
+    }
+    else
+    {
+        autoSpeedUpgradeButtonX5.interactable = false;
+        autoSpeedUpgradeButtonX5.image.color = Color.red;
+    }
+}
+
+
 
 
 

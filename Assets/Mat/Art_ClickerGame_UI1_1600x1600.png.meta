@@ -1,0 +1,416 @@
+fileFormatVersion: 2
+guid: 8357bbc337b0c624a887938c99e20cd3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6091942534275971932
+    second: Art_ClickerGame_UI1_1600x1600_0
+  - first:
+      213: 3656471980742952434
+    second: Art_ClickerGame_UI1_1600x1600_1
+  - first:
+      213: 4610283054058513735
+    second: Art_ClickerGame_UI1_1600x1600_2
+  - first:
+      213: -2585611270499006596
+    second: Art_ClickerGame_UI1_1600x1600_3
+  - first:
+      213: 9085184492931273959
+    second: Art_ClickerGame_UI1_1600x1600_4
+  - first:
+      213: 154347972385646925
+    second: Art_ClickerGame_UI1_1600x1600_5
+  - first:
+      213: -2733180092967906577
+    second: Art_ClickerGame_UI1_1600x1600_6
+  - first:
+      213: -8506693844457617006
+    second: Art_ClickerGame_UI1_1600x1600_7
+  - first:
+      213: -2051427078074805781
+    second: Art_ClickerGame_UI1_1600x1600_8
+  - first:
+      213: -8298726128370874667
+    second: Art_ClickerGame_UI1_1600x1600_9
+  - first:
+      213: -1380103680770001958
+    second: Art_ClickerGame_UI1_1600x1600_10
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Art_ClickerGame_UI1_1600x1600_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 79
+        width: 861
+        height: 1521
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a44364aa82157ba0800000000000000
+      internalID: -6091942534275971932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Art_ClickerGame_UI1_1600x1600_1
+      rect:
+        serializedVersion: 2
+        x: 859
+        y: 1439
+        width: 162
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f54a57c4e56eb230800000000000000
+      internalID: 3656471980742952434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Art_ClickerGame_UI1_1600x1600_2
+      rect:
+        serializedVersion: 2
+        x: 1029
+        y: 1439
+        width: 322
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7452927e2040bff30800000000000000
+      internalID: 4610283054058513735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Art_ClickerGame_UI1_1600x1600_3
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 1249
+        width: 182
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7709a6af301e1cd0800000000000000
+      internalID: -2585611270499006596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Art_ClickerGame_UI1_1600x1600_4
+      rect:
+        serializedVersion: 2
+        x: 1059
+        y: 1069
+        width: 362
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e45e04392f051e70800000000000000
+      internalID: 9085184492931273959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Art_ClickerGame_UI1_1600x1600_5
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 939
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4929d1c9aa542200800000000000000
+      internalID: 154347972385646925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Art_ClickerGame_UI1_1600x1600_6
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 939
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe29a7bbf2bc11ad0800000000000000
+      internalID: -2733180092967906577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Art_ClickerGame_UI1_1600x1600_7
+      rect:
+        serializedVersion: 2
+        x: 1129
+        y: 939
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2990a14d40722f980800000000000000
+      internalID: -8506693844457617006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Art_ClickerGame_UI1_1600x1600_8
+      rect:
+        serializedVersion: 2
+        x: 1259
+        y: 939
+        width: 122
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be1dbb001fdd783e0800000000000000
+      internalID: -2051427078074805781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Art_ClickerGame_UI1_1600x1600_9
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 749
+        width: 302
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d683360e8005dc80800000000000000
+      internalID: -8298726128370874667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Art_ClickerGame_UI1_1600x1600_10
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 559
+        width: 302
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad3be72b303e8dce0800000000000000
+      internalID: -1380103680770001958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Art_ClickerGame_UI1_1600x1600_0: -6091942534275971932
+      Art_ClickerGame_UI1_1600x1600_1: 3656471980742952434
+      Art_ClickerGame_UI1_1600x1600_10: -1380103680770001958
+      Art_ClickerGame_UI1_1600x1600_2: 4610283054058513735
+      Art_ClickerGame_UI1_1600x1600_3: -2585611270499006596
+      Art_ClickerGame_UI1_1600x1600_4: 9085184492931273959
+      Art_ClickerGame_UI1_1600x1600_5: 154347972385646925
+      Art_ClickerGame_UI1_1600x1600_6: -2733180092967906577
+      Art_ClickerGame_UI1_1600x1600_7: -8506693844457617006
+      Art_ClickerGame_UI1_1600x1600_8: -2051427078074805781
+      Art_ClickerGame_UI1_1600x1600_9: -8298726128370874667
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
