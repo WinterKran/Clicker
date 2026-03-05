@@ -63,6 +63,13 @@ double CalculateTotalCost(int baseCost, float multiplier, int amount)
     public float autoInterval = 1f;
     public TextMeshProUGUI autoPowerText;
 
+    [Header("Audio System")]
+    public AudioSource sfxSource;
+
+    public AudioClip clickSound;
+    public AudioClip upgradeSound;
+    public AudioClip killMonsterSound;
+
     [Header("Upgrade Settings")]
     public float costMultiplier = 1.15f;
 
@@ -189,6 +196,8 @@ double CalculateTotalCost(int baseCost, float multiplier, int amount)
 
     public void AddScore()
 {
+    PlaySFX(clickSound);   // 🔊 เล่นเสียงคลิก
+
     DamageMonster(clickPower);
 
     Vector3 mousePos = Mouse.current.position.ReadValue();
@@ -208,6 +217,8 @@ double CalculateTotalCost(int baseCost, float multiplier, int amount)
 {
     if (score >= clickUpgradeCost)
     {
+        PlaySFX(upgradeSound);  // 🔊 เสียงอัปเกรด
+
         score -= clickUpgradeCost;
         clickPower++;
 
@@ -323,6 +334,7 @@ void Update()
 {
     if (score >= autoUpgradeCost)
     {
+        PlaySFX(upgradeSound);
         score -= autoUpgradeCost;
         autoPower++;
 
@@ -351,6 +363,7 @@ public void BuyClickUpgrade2()
 {
     if (score >= clickUpgradeCost2)
     {
+        PlaySFX(upgradeSound);
         score -= clickUpgradeCost2;
 
         clickPower *= 2;
@@ -634,6 +647,8 @@ public void BuyClickUpgradeX5()
 
     if (score >= totalCost)
     {
+        PlaySFX(upgradeSound);  // 🔊 เสียงอัปเกรด
+
         score = score - (int)totalCost;
 
         for (int i = 0; i < 5; i++)
@@ -668,6 +683,8 @@ public void BuyAutoSpeedUpgrade()
 {
     if (score >= autoSpeedUpgradeCost && autoInterval > minAutoInterval)
     {
+        PlaySFX(upgradeSound);
+
         score -= autoSpeedUpgradeCost;
 
         autoInterval *= autoSpeedMultiplier;
@@ -707,6 +724,9 @@ public void BuyAutoUpgradeX5()
 
     if (score >= totalCost)
     {
+        PlaySFX(upgradeSound);
+
+
         score -= (int)totalCost;
 
         for (int i = 0; i < 5; i++)
@@ -743,6 +763,7 @@ public void BuyClickUpgrade2X5()
 
     if (score >= totalCost)
     {
+        PlaySFX(upgradeSound);
         score -= (int)totalCost;
 
         for (int i = 0; i < 5; i++)
@@ -781,6 +802,7 @@ public void BuyAutoSpeedUpgradeX5()
 
     if (score >= totalCost && autoInterval > minAutoInterval)
     {
+        PlaySFX(upgradeSound);
         score -= (int)totalCost;
 
         for (int i = 0; i < 5; i++)
@@ -821,6 +843,14 @@ void UpdateAutoSpeedButtonStateX5()
     {
         autoSpeedUpgradeButtonX5.interactable = false;
         autoSpeedUpgradeButtonX5.image.color = Color.red;
+    }
+}
+
+void PlaySFX(AudioClip clip)
+{
+    if (sfxSource != null && clip != null)
+    {
+        sfxSource.PlayOneShot(clip);
     }
 }
 
